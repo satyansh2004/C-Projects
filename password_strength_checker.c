@@ -34,6 +34,22 @@ bool containDigit(char password[], int nums[])
 
 bool containsUpperCase(char password[])
 {
+    int length = checkLength(password);
+    for (int i = 0; i < length; i++)
+    {
+        char ch = password[i];
+        int asciiValue = (int)ch;
+        for (int j = 65; j <= 90; j++)
+        {
+            if (asciiValue == j)
+            {
+                return true;
+                goto end;
+            }
+        }
+    }
+end:
+
     return false;
 }
 
@@ -47,4 +63,5 @@ int main(void)
 
     int length = checkLength(password);                   // Return Length
     int digitContainCheck = containDigit(password, nums); // Return true (1) or false (0)
+    int hasUpperCase = containsUpperCase(password);       // Return true (1) or false (0)
 }
