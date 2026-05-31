@@ -1,0 +1,19 @@
+# Ignore all executable files (Windows)
+*.exe
+
+# Ignore common C/C++ object files and libraries
+*.o
+*.obj
+*.out
+*.a
+*.lib
+
+# Ignore build directories and compiler output
+build/
+Debug/
+Release/
+.vscode/ipch/
+.vscode/.cmaketools/
+./.vscode
+# Ignore local log or run files
+*.log
