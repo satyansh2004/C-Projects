@@ -35,48 +35,60 @@ int main(void)
         }
     }
 
-rounding:
-    for (;;)
+    for (int i = 0; i < rounds; i++)
     {
-        printf("\nPick one:\nRock (Type: 1)\nPaper (Type: 2)\nScissor (Type: 3)\n\nYour Input: ");
-        scanf("%d", &user_input);
-
-        if (user_input == 1)
+        for (;;)
         {
-            break;
+            printf("\nPick one:\nRock (Type: 1)\nPaper (Type: 2)\nScissor (Type: 3)\n\nYour Input: ");
+            scanf("%d", &user_input);
+
+            if (user_input == 1)
+            {
+                goto end_rounds;
+            }
+            else if (user_input == 2)
+            {
+                goto end_rounds;
+            }
+            else if (user_input == 3)
+            {
+                goto end_rounds;
+            }
         }
-        else if (user_input == 2)
+
+    end_rounds:
+
+        int comp_decision = decison(user_input, randomNumUpto3());
+
+        if (comp_decision == 0)
         {
-            break;
+            score += 1;
+            robo_score += 1;
         }
-        else if (user_input == 3)
+        else if (comp_decision == 1)
         {
-            break;
+            score += 1;
+        }
+        else if (comp_decision == -1)
+        {
+            robo_score += 1;
         }
     }
 
-    if (decison(user_input, randomNumUpto3()) == 0)
-    {
-        score = 1;
-        robo_score = 1;
-    }
-    else if (decison(user_input, randomNumUpto3()) == 1)
-    {
-        score += 1;
-    }
-    else if (decison(user_input, randomNumUpto3()) == 1)
-    {
-        robo_score += 1;
-    }
+    printf("\n\nFinale Result:\nYour Score: %d\nRobot Score: %d\n", score, robo_score);
 
-    printf("\n\nFinale Result:\nYour Score: %d\nRobot Score: %d", score, robo_score);
-
-    int i = 3;
-    while (i != 3)
+    if (score > robo_score)
     {
-        i = i + 1;
+        printf("\nYou Won");
     }
-    goto rounding;
+    else if (score == robo_score)
+    {
+        printf("\nGame Draw");
+    }
+    else
+    {
+        printf("\nYou Lost");
+    }
 }
 
 int decison(int user_input, int randomNum)
