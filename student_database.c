@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Student
+struct Student
 {
     int roll;
     char name[50];
     float marks;
-} std;
+};
 
-float average_marks(std *student, int number_students)
+float average_marks(struct Student *student, int number_students)
 {
     float sum = 0;
     for (int i = 0; i < number_students; i++)
@@ -24,7 +24,7 @@ float average_marks(std *student, int number_students)
 
 float max = 0.00;
 char topper_name[50];
-void print_topper(std *students, int number_students)
+void print_topper(struct Student *students, int number_students)
 {
     for (int i = 0; i < number_students; i++)
     {
