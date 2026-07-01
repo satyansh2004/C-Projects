@@ -22,24 +22,23 @@ float average_marks(std *student, int number_students)
     return average;
 }
 
-void print_topper(std *student, int number_students)
+float max = 0.00;
+char topper_name[50];
+void print_topper(std *students, int number_students)
 {
     for (int i = 0; i < number_students; i++)
     {
-        float max = student[i].marks;
-        for (int j = i; j < number_students + 1; j++)
+        for (int j = 0; j < number_students; j++)
         {
-            if (student[i].marks > max)
+            if (students[i].marks > students[j].marks)
             {
-                max = student[i].marks;
-                printf("Max num: %f\n", max);
-            }
-            else
-            {
-                printf("Else Max num: %f\n", max);
+                max = students[i].marks;
+                strcpy(topper_name, students[i].name);
             }
         }
     }
+
+    printf("\nTopper name: %s\nTopper marks: %.2f", topper_name, max);
 }
 
 int main(void)
@@ -51,6 +50,8 @@ int main(void)
     scanf("%d", &number_students);
 
     struct Student *std_ptr = (struct Student *)malloc(number_students * sizeof(struct Student));
+
+    struct Student *temp = std_ptr;
     for (int i = 0; i < number_students; i++)
     {
         int roll;
@@ -73,18 +74,18 @@ int main(void)
         std_ptr[i].marks = marks;
     }
 
-    printf("\n");
-    // for (int i = 0; i < number_students; i++)
-    // {
-    //     printf("\nName: %s\nRoll: %d\nMarks: %.2f", (*std_ptr).name, (*std_ptr).roll, (*std_ptr).marks);
-    //     printf("\n");
-    //     std_ptr++;
-    // }
-    // float a = average_marks(std_ptr, number_students);
-    // printf("Average Marks: %.2f", a);
+    printf("\n________All Students________");
+    for (int i = 0; i < number_students; i++)
+    {
+        printf("\nName: %s\nRoll: %d\nMarks: %.2f", (*temp).name, (*temp).roll, (*temp).marks);
+        printf("\n");
+        temp++;
+    }
+    float a = average_marks(std_ptr, number_students);
+    printf("\nAverage Marks: %.2f\n", a);
     print_topper(std_ptr, number_students);
 
-    // free(std_ptr);
+    free(std_ptr);
 
     return 0;
 }
